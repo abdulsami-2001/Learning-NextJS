@@ -1,10 +1,20 @@
 
-const about = () => {
+const About = () => {
   return (
-    <div>
+    <>
+      <style jsx global>
+        {`
+          .gg{
+            background-color:red;
+          }
+        
+        `}
+      </style>
+      <div className="gg" >  
         <h1>Helo</h1>
-    </div>
+      </div>
+    </>
   )
 }
 
-export default about
+export default About

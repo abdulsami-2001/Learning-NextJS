@@ -1,0 +1,13 @@
+
+.navBar ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .navBar ul li{
+    list-style: none;
+    margin: 0px 20px;
+    font-size: x-large;
+    font-weight: bold;
+  }
