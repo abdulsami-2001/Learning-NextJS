@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import STYLES from './BlogStyles.module.css'
 import Link from 'next/link'
 
-const Blog = () => {
+const Blog = ({allBlogs}) => {
 
-  const [Blogs, setBlogs] = useState([])
-
+  const [Blogs, setBlogs] = useState(allBlogs)
+/*
   useEffect(() => {
     const options = { method: 'GET' };
 
@@ -13,7 +13,6 @@ const Blog = () => {
       .then(response => response.json())
       .then(response => {
 
-        console.log(response)
         setBlogs(response)
       }
       )
@@ -21,7 +20,7 @@ const Blog = () => {
         console.error(err)
       );
   }, [])
-
+*/
   return (
     <>
       {
@@ -30,12 +29,22 @@ const Blog = () => {
             <Link href={`blog/${blogItem.slug}`} >
               <h2>{blogItem.title}</h2>
             </Link>
-              <p>{blogItem.content}</p>
+              <p>{blogItem.content.substr(0,100)}...</p>
           </div>)
         })
       }
     </>
   )
+}
+
+export async function  getServerSideProps(context){
+
+  let data = await fetch('http://localhost:3000/api/blogs')
+  let response = await data.json()
+  
+  return{
+    props:{allBlogs:response}
+  }
 }
 
 export default Blog
