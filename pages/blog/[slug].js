@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import * as fs from 'fs'
 
-const Slug = ({ blogItem }) => {
+const slug = ({ blogItem }) => {
   // const router = useRouter()
 
   const [SingleBlog, setSingleBlog] = useState(blogItem)
@@ -46,40 +45,6 @@ const Slug = ({ blogItem }) => {
   }
 }
 
-
-
-export async function getStaticPaths(context){
-
-
-
-    return{
-      paths:[
-        {params:{slug:'how-to-learn-anaconda'}},
-        {params:{slug:'how-to-learn-java'}},
-        {params:{slug:'how-to-learn-js'}},
-        {params:{slug:'how-to-learn-mongodb'}},
-        {params:{slug:'how-to-learn-python'}},
-        {params:{slug:'how-to-learn-wp'}},
-      ],
-      fallback:true // false or 'blocking'
-    }
-
-}
-
-
-
-export async function getStaticProps(context){
-
-  const {slug} =  context.params
-  
-  let data = await fs.promises.readFile(`BlogPostData/${slug}.json`,'utf-8')
-  return{
-    props:{blogItem:JSON.parse(data)}
-  }
-}
-
-
-/*
 export async function getServerSideProps(context) {
 
   let data = await fetch(`http://localhost:3000/api/getBlogs?slug=${context.query.slug}`)
@@ -89,6 +54,6 @@ export async function getServerSideProps(context) {
     props: { blogItem: response }
   }
 }
-*/
 
-export default Slug
+
+export default slug
