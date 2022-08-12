@@ -5,6 +5,10 @@ const slug = ({ blogItem }) => {
   // const router = useRouter()
 
   const [SingleBlog, setSingleBlog] = useState(blogItem)
+  function createMarkup(c) {
+    return { __html: c }
+  }
+
 
   /*
     useEffect(() => {
@@ -37,7 +41,7 @@ const slug = ({ blogItem }) => {
 
       <>
         <h2>Title: {SingleBlog && SingleBlog.title}</h2>
-        <p>{SingleBlog && SingleBlog.content}</p>
+        {SingleBlog && <div dangerouslySetInnerHTML={createMarkup(SingleBlog.content)} ></div>}
         <p>Author:{SingleBlog && SingleBlog.author}</p>
       </>
 
